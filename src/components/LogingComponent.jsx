@@ -26,6 +26,7 @@ function LogingComponent() {
   }
   return (
     <div className='LogingComponent'>
+      <h1>Login</h1>
       <form action="POST">
         <div>
           {successMessage && <p>Authentication success!</p>}
