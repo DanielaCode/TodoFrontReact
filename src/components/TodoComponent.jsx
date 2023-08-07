@@ -4,7 +4,7 @@ import WelcomeComponent from './WelcomeComponent'
 
 function TodoComponent() {
   return (
-    <div>
+    <div className='TodoComponent'>
         TodoComponent
         <LogingComponent/>
         <WelcomeComponent/>

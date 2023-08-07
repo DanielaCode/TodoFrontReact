@@ -2,7 +2,7 @@ import React from 'react'
 
 function WelcomeComponent() {
   return (
-    <div>Welcome Component</div>
+    <div className='WelcomeComponent'>Welcome Component</div>
   )
 }
 
