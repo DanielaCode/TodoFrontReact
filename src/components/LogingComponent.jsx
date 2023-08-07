@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import styles from './TodoComponent.css'
+import { useNavigate } from "react-router-dom";
+
 function LogingComponent() {
   const [userName,setUserName] = useState("Admin")
   const [password,setPassword] = useState()
   const [successMessage,setSuccessMessage] = useState(false)
   const [failMessage,setFailMessage] = useState(false)
-
+  const navigate = useNavigate()
 
   function handleUserNameChange(event){
     setUserName(event.target.value)
@@ -17,6 +18,7 @@ function LogingComponent() {
     if (userName === "Admin" && password === "Admin") {
       setSuccessMessage(true)
       setFailMessage(false)
+      navigate('/welcome')
     }else{
       setSuccessMessage(false)
       setFailMessage(true)
