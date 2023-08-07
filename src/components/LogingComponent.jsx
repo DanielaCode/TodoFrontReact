@@ -18,7 +18,7 @@ function LogingComponent() {
     if (userName === "Admin" && password === "Admin") {
       setSuccessMessage(true)
       setFailMessage(false)
-      navigate('/welcome')
+      navigate(`/welcome/${userName}`)
     }else{
       setSuccessMessage(false)
       setFailMessage(true)

@@ -12,7 +12,7 @@ function TodoComponent() {
           <Routes>
             <Route path='/' element={<LogingComponent/>}/>
             <Route path='/login' element={<LogingComponent/>}/>
-            <Route path='/welcome' element={<WelcomeComponent/>}/>
+            <Route path='/welcome/:username' element={<WelcomeComponent/>}/>
             <Route path='*' element={<ErrorComponent/>}/>
           </Routes>
         </BrowserRouter>
