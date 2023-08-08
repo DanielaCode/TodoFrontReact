@@ -5,10 +5,12 @@ import WelcomeComponent from './WelcomeComponent'
 import styles from './TodoComponent.css'
 import ErrorComponent from './ErrorComponent';
 import TodosListComponent from './TodosListComponent';
+import HeaderComponent from './HeaderComponent';
+import FooterComponent from './FooterComponent';
 function TodoComponent() {
   return (
     <div className='TodoComponent'>
-        TodoComponent
+        <HeaderComponent/>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<LogingComponent/>}/>
@@ -18,6 +20,7 @@ function TodoComponent() {
             <Route path='*' element={<ErrorComponent/>}/>
           </Routes>
         </BrowserRouter>
+        <FooterComponent/>
     </div>
   )
 }
