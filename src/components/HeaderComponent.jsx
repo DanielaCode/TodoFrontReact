@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../providers/AuthContext";
+import { useAuth } from "../providers/AuthContext";
 
 function HeaderComponent() {
-  const authContext = useContext(AuthContext)
+  const authContext = useAuth()
   return (
     <header className="border-bottom border-5 mb-5 p-2">
       <div className="container">
