@@ -5,7 +5,6 @@ import { useAuth } from "../providers/AuthContext";
 function LogingComponent() {
   const [userName, setUserName] = useState("Admin");
   const [password, setPassword] = useState();
-  const [successMessage, setSuccessMessage] = useState(false);
   const [failMessage, setFailMessage] = useState(false);
   const navigate = useNavigate();
   const autContext = useAuth()
@@ -16,13 +15,10 @@ function LogingComponent() {
     setPassword(event.target.value)
   }
   function handleSubmit(event) {
-    if (userName === "Admin" && password === "Admin") {
-      setSuccessMessage(true)
+    if (autContext.login(userName,password)) {
       setFailMessage(false)
-      autContext.setAuth(true)
       navigate(`/welcome/${userName}`)
     } else {
-      setSuccessMessage(false)
       setFailMessage(true)
     }
   }
@@ -31,7 +27,6 @@ function LogingComponent() {
       <h1>Login</h1>
       <form action="POST">
         <div>
-          {successMessage && <p>Authentication success!</p>}
           {failMessage && <p>Authentication failed!</p>}
         </div>
         <div>

@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../providers/AuthContext";
 
@@ -13,7 +12,7 @@ function HeaderComponent() {
               className="navbar-brand ms-2 fs-2 fw-bold text-black"
               href="https://github.com/DanielaCode"
             >
-              DanielaCode {authContext.number}
+              DanielaCode
             </a>
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav">
@@ -30,7 +29,7 @@ function HeaderComponent() {
                 {!authContext.isAuth && <Link className="nav-link" to="/login">Login</Link>}
               </li>
               <li className="nav-item fs-5">
-                {authContext.isAuth && <Link className="nav-link" to="/login">Logout</Link>}               
+                {authContext.isAuth && <Link className="nav-link" to="/login" onClick={() => authContext.logout()}>Logout</Link>}               
               </li>
             </ul>
           </nav>
