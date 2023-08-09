@@ -7,9 +7,11 @@ import ErrorComponent from "./ErrorComponent";
 import TodosListComponent from "./TodosListComponent";
 import HeaderComponent from "./HeaderComponent";
 import FooterComponent from "./FooterComponent";
+import AuthProvider from '../providers/AuthContext';
 function TodoComponent() {
   return (
     <div className="TodoComponent">
+      <AuthProvider>
       <BrowserRouter>
         <HeaderComponent />
         <Routes>
@@ -21,6 +23,7 @@ function TodoComponent() {
         </Routes>
         <FooterComponent />
       </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

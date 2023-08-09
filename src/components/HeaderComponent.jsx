@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthContext";
 
 function HeaderComponent() {
+  const authContext = useContext(AuthContext)
   return (
     <header className="border-bottom border-5 mb-5 p-2">
       <div className="container">
@@ -11,7 +13,7 @@ function HeaderComponent() {
               className="navbar-brand ms-2 fs-2 fw-bold text-black"
               href="https://github.com/DanielaCode"
             >
-              DanielaCode
+              DanielaCode {authContext.number}
             </a>
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav">
