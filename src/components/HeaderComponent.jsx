@@ -18,27 +18,19 @@ function HeaderComponent() {
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav">
                 <li className="nav-item fs-5">
-                  <Link className="nav-link" to="/welcome/DanielaCode">
-                    Home
-                  </Link>
+                  {authContext.isAuth && <Link className="nav-link" to="/welcome/DanielaCode">Home</Link>}
                 </li>
                 <li className="nav-item fs-5">
-                  <Link className="nav-link" to="/todos">
-                    Todos
-                  </Link>
+                  {authContext.isAuth && <Link className="nav-link" to="/todos">Todos</Link>}
                 </li>
               </ul>
             </div>
             <ul className="navbar-nav">
               <li className="nav-item fs-5">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
+                {!authContext.isAuth && <Link className="nav-link" to="/login">Login</Link>}
               </li>
               <li className="nav-item fs-5">
-                <Link className="nav-link" to="/login">
-                  Logout
-                </Link>
+                {authContext.isAuth && <Link className="nav-link" to="/login">Logout</Link>}               
               </li>
             </ul>
           </nav>

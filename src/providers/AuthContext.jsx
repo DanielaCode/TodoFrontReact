@@ -18,9 +18,10 @@ export default function AuthProvider({children}) {
 
     //put some state in the context to be able to share with others components
     const [number,setNumber] = useState(0)
+    const [isAuth,setAuth] = useState(false)
 
     return (
-        <AuthContext.Provider value={{number}}>
+        <AuthContext.Provider value={{number, isAuth, setAuth}}>
             {children}
         </AuthContext.Provider>
     )

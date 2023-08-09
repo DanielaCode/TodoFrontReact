@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../providers/AuthContext";
 
 function LogingComponent() {
   const [userName, setUserName] = useState("Admin");
@@ -7,21 +8,22 @@ function LogingComponent() {
   const [successMessage, setSuccessMessage] = useState(false);
   const [failMessage, setFailMessage] = useState(false);
   const navigate = useNavigate();
-
+  const autContext = useAuth()
   function handleUserNameChange(event) {
-    setUserName(event.target.value);
+    setUserName(event.target.value)
   }
   function handlePasswordChange(event) {
-    setPassword(event.target.value);
+    setPassword(event.target.value)
   }
   function handleSubmit(event) {
     if (userName === "Admin" && password === "Admin") {
-      setSuccessMessage(true);
-      setFailMessage(false);
-      navigate(`/welcome/${userName}`);
+      setSuccessMessage(true)
+      setFailMessage(false)
+      autContext.setAuth(true)
+      navigate(`/welcome/${userName}`)
     } else {
-      setSuccessMessage(false);
-      setFailMessage(true);
+      setSuccessMessage(false)
+      setFailMessage(true)
     }
   }
   return (
