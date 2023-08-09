@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react";
 
 function ErrorComponent() {
   return (
-    <div className='ErrorComponent'>
+    <div className="ErrorComponent">
       <h1>Error</h1>
-       Error Component
+      Error Component
     </div>
-  )
+  );
 }
 
-export default ErrorComponent
+export default ErrorComponent;
