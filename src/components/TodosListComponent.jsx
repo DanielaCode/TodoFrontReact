@@ -1,5 +1,10 @@
 import React from "react";
+import { getTodo } from "../api/TodoApiService";
 function TodosListComponent() {
+  getTodo()
+  .then((data)=>console.log(data))
+  .catch((error)=>console.log(error))
+  .finally(()=>console.log("clean"));
   const todos = [
     {
       id: 1,
