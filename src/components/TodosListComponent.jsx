@@ -1,37 +1,25 @@
-import React from "react";
-import { getTodo } from "../api/TodoApiService";
+import React, { useEffect, useState } from "react";
+import { getTodosByUser } from "../api/TodoApiService";
 function TodosListComponent() {
-  getTodo()
-  .then((data)=>console.log(data))
-  .catch((error)=>console.log(error))
-  .finally(()=>console.log("clean"));
-  const todos = [
-    {
-      id: 1,
-      des: "study microservices",
-      sts: "done",
-      date: new Date(2023, 1, 6),
-    },
-    {
-      id: 2,
-      des: "study microservices",
-      sts: "done",
-      date: new Date(2023, 1, 6),
-    },
-    {
-      id: 3,
-      des: "study microservices",
-      sts: "done",
-      date: new Date(2023, 1, 6),
-    },
-  ];
+  const[todos,setTodos]=useState([]);
 
+  useEffect(()=>refreshTodos(),[]);
+
+  function refreshTodos(){
+    getTodosByUser("Admin")
+    .then((response)=>{
+      console.log(response.data)
+      setTodos(response.data)})
+    .catch((error)=>console.log(error))
+    .finally(()=>console.log("clean"));
+  }
+  
   const items = todos.map((todo) => (
     <tr key={todo.id}>
       <td>{todo.id}</td>
-      <td>{todo.des}</td>
-      <td>{todo.sts}</td>
-      <td>{todo.date.toDateString()}</td>
+      <td>{todo.description}</td>
+      <td>{todo.done.toString()}</td>
+      <td>{todo.targetDate}</td>
     </tr>
   ));
   return (
