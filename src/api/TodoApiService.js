@@ -7,3 +7,4 @@ const apiClient=axios.create(
 );
 
 export const getTodosByUser = (username) => apiClient.get(`/users/${username}/todos`)
+export const deleteTodoById= (username,id) => apiClient.delete(`/users/${username}/todos/${id}`)

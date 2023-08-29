@@ -1,38 +1,48 @@
 import React, { useEffect, useState } from "react";
-import { getTodosByUser } from "../api/TodoApiService";
+import { getTodosByUser,deleteTodoById } from "../api/TodoApiService";
 function TodosListComponent() {
   const[todos,setTodos]=useState([]);
+  const[message,setMessage]=useState(null);
 
   useEffect(()=>refreshTodos(),[]);
 
   function refreshTodos(){
     getTodosByUser("Admin")
-    .then((response)=>{
-      console.log(response.data)
-      setTodos(response.data)})
-    .catch((error)=>console.log(error))
-    .finally(()=>console.log("clean"));
+    .then(response=>setTodos(response.data))
+    .catch(error=>console.log(error))
   }
-  
+
+  function deleteTodo(id){
+    deleteTodoById("Admin",id)
+    .then(response=>{
+      setMessage(`Deleted todo with id = ${id}`)
+      refreshTodos()
+    })
+    .catch(error=>console.log(error))
+  }
+
   const items = todos.map((todo) => (
     <tr key={todo.id}>
       <td>{todo.id}</td>
       <td>{todo.description}</td>
       <td>{todo.done.toString()}</td>
       <td>{todo.targetDate}</td>
+      <td><button className="btn btn-warning" onClick={() => deleteTodo(todo.id)}>Delete</button></td>
     </tr>
   ));
+
   return (
     <div className="container">
       <h1>Todos List</h1>
-      TodosListComponent
+      {message && <div className="alert alert-warning">{message}</div>}
       <table className="table">
         <thead>
           <tr>
-            <td>Id</td>
-            <td>Description</td>
-            <td>Status</td>
-            <td>Date</td>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>{items}</tbody>
