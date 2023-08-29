@@ -8,6 +8,7 @@ import TodosListComponent from "./TodosListComponent";
 import HeaderComponent from "./HeaderComponent";
 import FooterComponent from "./FooterComponent";
 import AuthProvider, { useAuth } from '../providers/AuthContext';
+import DetailsComponent from "./DetailsComponent";
 
 function AuthenticatedRoute({children}){
   const isAuth = useAuth().isAuth
@@ -27,6 +28,7 @@ function TodoComponent() {
           <Route path="/login" element={<LogingComponent />} />
           <Route path="/welcome/:username" element={<AuthenticatedRoute><WelcomeComponent /></AuthenticatedRoute>} />
           <Route path="/todos" element={<AuthenticatedRoute><TodosListComponent /></AuthenticatedRoute>} />
+          <Route path="/details/:id" element={<AuthenticatedRoute><DetailsComponent/></AuthenticatedRoute>} />
           <Route path="*" element={<ErrorComponent />} />
         </Routes>
         <FooterComponent />
