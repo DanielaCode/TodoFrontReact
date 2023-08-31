@@ -25,7 +25,6 @@ function TodosListComponent() {
 
   const items = todos.map((todo) => (
     <tr key={todo.id}>
-      <td>{todo.id}</td>
       <td>{todo.description}</td>
       <td>{todo.done.toString()}</td>
       <td>{todo.targetDate}</td>
@@ -41,7 +40,6 @@ function TodosListComponent() {
       <table className="table">
         <thead>
           <tr>
-            <th>Id</th>
             <th>Description</th>
             <th>Status</th>
             <th>Date</th>
@@ -51,6 +49,7 @@ function TodosListComponent() {
         </thead>
         <tbody>{items}</tbody>
       </table>
+      <button className="btn btn-success m-5" onClick={() =>navigate(`/details/-1`)}>Add Todo</button>
     </div>
   );
 }

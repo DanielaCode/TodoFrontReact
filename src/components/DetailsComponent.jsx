@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getTodoById, updateTodoById } from '../api/TodoApiService';
+import { createTodo, getTodoById, updateTodoById } from '../api/TodoApiService';
 import {Formik,Form,Field,ErrorMessage} from 'formik';
 
 
@@ -12,16 +12,17 @@ export default function DetailsComponent() {
   useEffect(()=>getTodoInfo(),[id])
 
   function getTodoInfo(){
-    getTodoById("Admin",id)
-    .then(response=>{
-      setDescription(response.data.description)
-      setTargetDate(response.data.targetDate)
-    })
-    .catch(error=>console.log(error))
+    if(id!=='-1'){
+      getTodoById("Admin",id)
+      .then(response=>{
+        setDescription(response.data.description)
+        setTargetDate(response.data.targetDate)
+      })
+      .catch(error=>console.log(error))
+    }
   }
 
   function onSubmit(values){
-    console.log(values)
     const todo={
       id:id,
       username:"Admin",
@@ -29,9 +30,15 @@ export default function DetailsComponent() {
       targetDate:values.targetDate,
       done:false
     }
-    updateTodoById("Admin",id,todo)
-    .then(navigate('/todos'))
-    .catch()
+    if(id==='-1'){
+      createTodo("Admin",todo)
+      .then(navigate('/todos'))
+      .catch(error=>console.log(error))
+    }else{
+      updateTodoById("Admin",id,todo)
+      .then(navigate('/todos'))
+      .catch(error=>console.log(error))
+    }
   }
 
   function validate(values){
