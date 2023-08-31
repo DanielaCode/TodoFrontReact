@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getTodoById, updateTodoById } from '../api/TodoApiService';
 import {Formik,Form,Field,ErrorMessage} from 'formik';
 
@@ -8,7 +8,7 @@ export default function DetailsComponent() {
   const {id} = useParams();
   const [description,setDescription] = useState();
   const [targetDate,setTargetDate] = useState();
-
+  const navigate = useNavigate();
   useEffect(()=>getTodoInfo(),[id])
 
   function getTodoInfo(){
@@ -25,12 +25,12 @@ export default function DetailsComponent() {
     const todo={
       id:id,
       username:"Admin",
-      description:description,
-      targetDate:targetDate,
+      description:values.description,
+      targetDate:values.targetDate,
       done:false
     }
     updateTodoById("Admin",id,todo)
-    .then()
+    .then(navigate('/todos'))
     .catch()
   }
 
