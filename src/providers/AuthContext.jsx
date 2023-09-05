@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { basicAuth } from "../api/TodoApiService";
 
 /**
  * 1. Create a context
@@ -20,12 +21,16 @@ export default function AuthProvider({ children }) {
 
   //refactoring to move have all the modifiers of isAuth here
   function login(userName, password) {
-    if (userName === "Admin" && password === "Admin") {
-      setAuth(true);
-      return true;
-    } else {
-      return false;
-    }
+    const basicToken = 'Basic ' + window.btoa(userName+':'+password)
+    basicAuth(basicToken)
+      .then((res)=>console.log(res))
+      .catch(err=>console.log(err))
+    // if (userName === "Admin" && password === "Admin") {
+    //   setAuth(true);
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   function logout() {

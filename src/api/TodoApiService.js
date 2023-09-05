@@ -5,7 +5,7 @@ const apiClient=axios.create(
         baseURL:"http://localhost:8081"
     }
 );
-
+export const basicAuth = (token) => apiClient.get(`/basicauth`,{headers:{Authorization:token}})
 export const getTodosByUser = (username) => apiClient.get(`/users/${username}/todos`)
 export const getTodoById= (username,id) => apiClient.get(`/users/${username}/todos/${id}`)
 export const deleteTodoById= (username,id) => apiClient.delete(`/users/${username}/todos/${id}`)

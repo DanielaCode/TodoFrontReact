@@ -9,7 +9,7 @@ export default function DetailsComponent() {
   const [description,setDescription] = useState();
   const [targetDate,setTargetDate] = useState();
   const navigate = useNavigate();
-  useEffect(()=>getTodoInfo(),[id])
+  useEffect(()=>{getTodoInfo()},[id])
 
   function getTodoInfo(){
     if(id!=='-1'){
@@ -24,7 +24,6 @@ export default function DetailsComponent() {
 
   function onSubmit(values){
     const todo={
-      id:id,
       username:"Admin",
       description:values.description,
       targetDate:values.targetDate,
@@ -67,7 +66,7 @@ export default function DetailsComponent() {
             <Field type="date" name="targetDate" className="form-control"></Field>
           </fieldset>
           <div>
-            <button type="submit" className='btn btn-success m-5'>update</button>
+            <button type="submit" className='btn btn-success m-5'>submit</button>
           </div>
         </Form>
       </Formik>  
