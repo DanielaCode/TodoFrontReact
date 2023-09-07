@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { getTodosByUser,deleteTodoById } from "../api/TodoApiService";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../providers/AuthContext";
 function TodosListComponent() {
   const[todos,setTodos]=useState([]);
   const[message,setMessage]=useState(null);
   const navigate = useNavigate();
-
+  const auth = useAuth();
   useEffect(()=>refreshTodos(),[]);
 
   function refreshTodos(){
-    getTodosByUser("Admin")
+    getTodosByUser(auth.username)
     .then(response=>setTodos(response.data))
     .catch(error=>console.log(error))
   }
 
   function deleteTodo(id){
-    deleteTodoById("Admin",id)
+    deleteTodoById(auth.username,id)
     .then(response=>{
       setMessage(`Deleted todo with id = ${id}`)
       refreshTodos()

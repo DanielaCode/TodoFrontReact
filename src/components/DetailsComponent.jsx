@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { createTodo, getTodoById, updateTodoById } from '../api/TodoApiService';
 import {Formik,Form,Field,ErrorMessage} from 'formik';
+import { useAuth } from '../providers/AuthContext';
 
 
 export default function DetailsComponent() {
@@ -9,11 +10,12 @@ export default function DetailsComponent() {
   const [description,setDescription] = useState();
   const [targetDate,setTargetDate] = useState();
   const navigate = useNavigate();
+  const auth = useAuth();
   useEffect(()=>{getTodoInfo()},[id])
 
   function getTodoInfo(){
     if(id!=='-1'){
-      getTodoById("Admin",id)
+      getTodoById(auth.username,id)
       .then(response=>{
         setDescription(response.data.description)
         setTargetDate(response.data.targetDate)
@@ -24,17 +26,17 @@ export default function DetailsComponent() {
 
   function onSubmit(values){
     const todo={
-      username:"Admin",
+      username:auth.username,
       description:values.description,
       targetDate:values.targetDate,
       done:false
     }
     if(id==='-1'){
-      createTodo("Admin",todo)
+      createTodo(auth.username,todo)
       .then(navigate('/todos'))
       .catch(error=>console.log(error))
     }else{
-      updateTodoById("Admin",id,todo)
+      updateTodoById(auth.username,id,todo)
       .then(navigate('/todos'))
       .catch(error=>console.log(error))
     }
